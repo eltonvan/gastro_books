@@ -1,8 +1,10 @@
 # Gastro Books
 
-**Gastronomy payroll, bookkeeping, and backoffice services.**
+**Gastronomy payroll, bookkeeping, and backoffice services in Berlin, Germany.**
 
-This is the source for the marketing landing page at [mygastrobooks.de](https://mygastrobooks.de).
+A bilingual (DE/EN) marketing landing page for [mygastrobooks.de](https://mygastrobooks.de). The site showcases payroll processing, bookkeeping, and backoffice support tailored for restaurants, cafés, and bars. Visitors can browse services, read FAQs, and get in touch via a contact form, phone, or WhatsApp.
+
+Built as a static single-page application — no backend, no API keys, no server runtime required.
 
 ## Stack
 
