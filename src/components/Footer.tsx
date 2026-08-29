@@ -32,12 +32,12 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
           <div className="mt-2 text-slate-400 text-xs font-serif-header italic flex flex-wrap items-center justify-center md:justify-start gap-2">
             <span>mygastrobooks.de</span>
             <span>//</span>
-            <a href="tel:+491775355900" className="hover:text-white transition">
-              +49 177 5355900
+            <a href="tel:+491776265692" className="hover:text-white transition">
+              +49 177 6265692
             </a>
             <span>//</span>
             <a
-              href="https://wa.me/491775355900"
+              href="https://wa.me/491776265692"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#25D366] hover:text-emerald-400 font-semibold transition"
@@ -115,8 +115,8 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
                     <strong>Kontakt:</strong><br />
                     Webseite: mygastrobooks.de<br />
                     E-Mail: hallo@mygastrobooks.de<br />
-                    Telefon: +49 177 5355900<br />
-                    WhatsApp: +49 177 5355900
+                    Telefon: +49 177 6265692<br />
+                    WhatsApp: +49 177 6265692
                   </div>
                   <div className="bg-[#FAF8F5] p-4 rounded-lg border border-[#D2C19D] text-xs text-slate-800 leading-normal flex items-start gap-2.5">
                     <ShieldCheck className="w-4 h-4 text-[#B89355] shrink-0 mt-0.5" />

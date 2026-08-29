@@ -20,12 +20,12 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onSwitchLang, onOpenQuoteM
       <div className="bg-[#1C1B1A] text-[#D2C19D] py-1.5 text-[11px] font-medium border-b border-slate-800 hidden sm:block">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           <div className="flex items-center space-x-6">
-            <a href="tel:+491775355900" className="flex items-center gap-1.5 hover:text-white transition">
+            <a href="tel:+491776265692" className="flex items-center gap-1.5 hover:text-white transition">
               <Phone className="w-3.5 h-3.5 text-[#B89355]" />
-              <span>+49 177 5355900</span>
+              <span>+49 177 6265692</span>
             </a>
             <a
-              href="https://wa.me/491775355900"
+              href="https://wa.me/491776265692"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 hover:text-emerald-400 transition"
@@ -164,7 +164,7 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onSwitchLang, onOpenQuoteM
 
           <div className="pt-4 border-t border-slate-100 space-y-2.5">
             <a
-              href="https://wa.me/491775355900"
+              href="https://wa.me/491776265692"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full flex items-center justify-center gap-2 bg-[#25D366] text-white py-3 rounded-lg text-xs font-bold uppercase tracking-wider"
@@ -174,11 +174,11 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onSwitchLang, onOpenQuoteM
             </a>
 
             <a
-              href="tel:+491775355900"
+              href="tel:+491776265692"
               className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-lg text-xs font-bold uppercase tracking-wider"
             >
               <Phone className="w-4 h-4 text-[#B89355]" />
-              <span>+49 177 5355900</span>
+              <span>+49 177 6265692</span>
             </a>
 
             <button

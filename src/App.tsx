@@ -26,18 +26,46 @@ export default function App() {
   const [embeddedSubmitted, setEmbeddedSubmitted] = useState(false);
   const [embeddedCaptchaVerified, setEmbeddedCaptchaVerified] = useState(false);
   const [embeddedCaptchaError, setEmbeddedCaptchaError] = useState(false);
+  const [embeddedSending, setEmbeddedSending] = useState(false);
+  const [embeddedSubmitError, setEmbeddedSubmitError] = useState(false);
 
   const handleSwitchLang = (newLang: Language) => {
     setLang(newLang);
   };
 
-  const handleEmbeddedSubmit = (e: React.FormEvent) => {
+  const handleEmbeddedSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!embeddedCaptchaVerified) {
       setEmbeddedCaptchaError(true);
       return;
     }
-    setEmbeddedSubmitted(true);
+    setEmbeddedSending(true);
+    setEmbeddedSubmitError(false);
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/hallo@mygastrobooks.de', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: embeddedForm.name,
+          venue: embeddedForm.venue,
+          email: embeddedForm.email,
+          phone: embeddedForm.phone || '—',
+          message: embeddedForm.message || '—',
+          _subject: `Gastro Books contact: ${embeddedForm.name} — ${embeddedForm.venue}`,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      });
+      if (!res.ok) throw new Error('send failed');
+      setEmbeddedSubmitted(true);
+    } catch {
+      setEmbeddedSubmitError(true);
+    } finally {
+      setEmbeddedSending(false);
+    }
   };
 
   return (
@@ -90,12 +118,12 @@ export default function App() {
 
               {/* Direct Info Pills */}
               <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 text-xs font-serif-header text-[#D2C19D] mt-6 pt-4 border-t border-slate-800">
-                <a href="tel:+491775355900" className="flex items-center gap-1.5 hover:text-white transition bg-slate-900/80 px-3 py-1.5 rounded-full border border-slate-700">
+                <a href="tel:+491776265692" className="flex items-center gap-1.5 hover:text-white transition bg-slate-900/80 px-3 py-1.5 rounded-full border border-slate-700">
                   <Phone className="w-3.5 h-3.5 text-[#B89355]" />
-                  <span>+49 177 5355900</span>
+                  <span>+49 177 6265692</span>
                 </a>
                 <a
-                  href="https://wa.me/491775355900"
+                  href="https://wa.me/491776265692"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-1.5 hover:text-white transition bg-[#25D366]/20 text-[#25D366] hover:bg-[#25D366]/30 px-3.5 py-1.5 rounded-full border border-[#25D366]/40 font-bold"
@@ -206,11 +234,28 @@ export default function App() {
                   }
                 />
 
+                {embeddedSubmitError && (
+                  <p className="text-red-400 text-[11px] font-semibold">
+                    {lang === 'de'
+                      ? 'Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder schreiben Sie an hallo@mygastrobooks.de.'
+                      : 'Could not send message. Please try again or email hallo@mygastrobooks.de.'}
+                  </p>
+                )}
+
                 <button
                   type="submit"
-                  className="w-full btn-aj-gold-filled text-xs font-bold uppercase tracking-wider py-4 flex items-center justify-center gap-2 cursor-pointer mt-2"
+                  disabled={embeddedSending}
+                  className="w-full btn-aj-gold-filled text-xs font-bold uppercase tracking-wider py-4 flex items-center justify-center gap-2 cursor-pointer mt-2 disabled:opacity-60"
                 >
-                  <span>{lang === 'de' ? 'NACHRICHT SENDEN' : 'SEND MESSAGE'}</span>
+                  <span>
+                    {embeddedSending
+                      ? lang === 'de'
+                        ? 'WIRD GESENDET…'
+                        : 'SENDING…'
+                      : lang === 'de'
+                        ? 'NACHRICHT SENDEN'
+                        : 'SEND MESSAGE'}
+                  </span>
                   <Send className="w-4 h-4" />
                 </button>
               </form>

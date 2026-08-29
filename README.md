@@ -38,4 +38,4 @@ The `dist/` folder can be deployed to any static hosting (Vercel, Netlify, Cloud
 ## Contact
 
 - **Email:** hallo@mygastrobooks.de
-- **Phone / WhatsApp:** +49 177 5355900
+- **Phone / WhatsApp:** +49 177 6265692

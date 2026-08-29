@@ -27,7 +27,7 @@ export const WhatsAppIcon: React.FC<{ className?: string; size?: number }> = ({
 );
 
 export const WhatsAppFloatingButton: React.FC<WhatsAppWidgetProps> = ({ lang }) => {
-  const whatsappUrl = `https://wa.me/491775355900?text=${encodeURIComponent(
+  const whatsappUrl = `https://wa.me/491776265692?text=${encodeURIComponent(
     lang === 'de'
       ? 'Hallo Gastro Books, ich interessiere mich für Lohnabrechnung und Buchhaltung.'
       : 'Hello Gastro Books, I would like to inquire about payroll and bookkeeping.'

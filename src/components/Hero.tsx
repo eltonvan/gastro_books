@@ -66,10 +66,10 @@ export const Hero: React.FC<HeroProps> = ({ lang, onOpenQuoteModal }) => {
                   {lang === 'de' ? 'DIREKTER ANSPRECHPARTNER' : 'DIRECT CONTACT'}
                 </div>
                 <a
-                  href="tel:+491775355900"
+                  href="tel:+491776265692"
                   className="text-base font-bold text-white mt-0.5 hover:text-[#D2C19D] transition block"
                 >
-                  +49 177 5355900
+                  +49 177 6265692
                 </a>
                 <a
                   href="mailto:hallo@mygastrobooks.de"
@@ -81,7 +81,7 @@ export const Hero: React.FC<HeroProps> = ({ lang, onOpenQuoteModal }) => {
 
               <div className="w-full space-y-2 pt-1">
                 <a
-                  href="https://wa.me/491775355900"
+                  href="https://wa.me/491776265692"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold uppercase tracking-wider py-2.5 rounded-lg shadow-md transition"

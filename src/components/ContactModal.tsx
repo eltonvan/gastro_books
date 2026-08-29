@@ -27,18 +27,47 @@ export const ContactModal: React.FC<ContactModalProps> = ({
   const [ticketRef, setTicketRef] = useState('');
   const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
   const [captchaError, setCaptchaError] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isCaptchaVerified) {
       setCaptchaError(true);
       return;
     }
     const randomRef = 'GB-' + Math.floor(100000 + Math.random() * 900000);
-    setTicketRef(randomRef);
-    setSubmitted(true);
+    setSending(true);
+    setSubmitError(false);
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/hallo@mygastrobooks.de', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.fullName,
+          venue: formData.venueName,
+          email: formData.email,
+          phone: formData.phone || '—',
+          message: formData.message || '—',
+          reference: randomRef,
+          _subject: `Gastro Books inquiry: ${formData.fullName} — ${formData.venueName} (${randomRef})`,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      });
+      if (!res.ok) throw new Error('send failed');
+      setTicketRef(randomRef);
+      setSubmitted(true);
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -60,12 +89,12 @@ export const ContactModal: React.FC<ContactModalProps> = ({
           </p>
           
           <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-serif-header text-[#D2C19D] mt-3 pt-3 border-t border-slate-800">
-            <a href="tel:+491775355900" className="flex items-center gap-1.5 hover:text-white transition">
+            <a href="tel:+491776265692" className="flex items-center gap-1.5 hover:text-white transition">
               <Phone className="w-3.5 h-3.5 text-[#B89355]" />
-              <span>+49 177 5355900</span>
+              <span>+49 177 6265692</span>
             </a>
             <a
-              href="https://wa.me/491775355900"
+              href="https://wa.me/491776265692"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-[#25D366] hover:text-white transition font-bold"
@@ -192,11 +221,28 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                 }
               />
 
+              {submitError && (
+                <p className="text-red-500 text-[11px] font-semibold">
+                  {lang === 'de'
+                    ? 'Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder schreiben Sie an hallo@mygastrobooks.de.'
+                    : 'Could not send message. Please try again or email hallo@mygastrobooks.de.'}
+                </p>
+              )}
+
               <button
                 type="submit"
-                className="w-full btn-aj-gold-filled text-xs uppercase tracking-wider py-3.5 flex items-center justify-center gap-2 cursor-pointer mt-2 font-bold"
+                disabled={sending}
+                className="w-full btn-aj-gold-filled text-xs uppercase tracking-wider py-3.5 flex items-center justify-center gap-2 cursor-pointer mt-2 font-bold disabled:opacity-60"
               >
-                <span>{lang === 'de' ? 'NACHRICHT SENDEN' : 'SEND MESSAGE'}</span>
+                <span>
+                  {sending
+                    ? lang === 'de'
+                      ? 'WIRD GESENDET…'
+                      : 'SENDING…'
+                    : lang === 'de'
+                      ? 'NACHRICHT SENDEN'
+                      : 'SEND MESSAGE'}
+                </span>
                 <Send className="w-4 h-4" />
               </button>
 
@@ -223,7 +269,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
                 <a
-                  href="https://wa.me/491775355900"
+                  href="https://wa.me/491776265692"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 bg-[#25D366] text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-lg shadow hover:bg-[#20bd5a] transition"
