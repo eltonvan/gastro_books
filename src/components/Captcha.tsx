@@ -29,12 +29,11 @@ export const Captcha: React.FC<CaptchaProps> = ({
     setUserAnswer('');
     setIsVerified(false);
     setError(false);
-    onVerifyChange(false);
-  }, [onVerifyChange]);
+  }, []);
 
   useEffect(() => {
     generateChallenge();
-  }, [generateChallenge]);
+  }, []);
 
   const handleAnswerChange = (val: string) => {
     setUserAnswer(val);
